@@ -1,0 +1,17 @@
+def unify(x, y, s=None):
+    s = {} if s is None else s
+    if x == y: return s
+    if isinstance(x,str): return unify_var(x,y,s)
+    if isinstance(y,str): return unify_var(y,x,s)
+    if isinstance(x,list) and isinstance(y,list):
+        if len(x)!=len(y): return None
+        return s if all(unify(xi,yi,s) for xi,yi in zip(x,y)) else None
+    return None
+
+def unify_var(v, x, s):
+    if v in s: return unify(s[v],x,s)
+    if x in s: return unify(v,s[x],s)
+    s[v] = x
+    return s
+
+print(unify(['x', 'y'], ['z', 'z']))

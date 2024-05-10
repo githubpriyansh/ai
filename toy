@@ -1,0 +1,23 @@
+from sklearn import tree
+
+# Define the features and labels
+# In this toy example, we're classifying fruits based on their features
+# Features: weight (grams) and texture (0 for smooth, 1 for bumpy)
+# Labels: 0 for apple, 1 for orange
+features = [[140, 1], [130, 1], [150, 0], [170, 0]]
+labels = [0, 0, 1, 1]
+
+# Create a decision tree classifier
+classifier = tree.DecisionTreeClassifier()
+
+# Train the classifier
+classifier = classifier.fit(features, labels)
+
+
+new_fruit = [[140, 0]]
+prediction = classifier.predict(new_fruit)
+
+if prediction[0] == 0:
+    print("It's an apple!")
+else:
+    print("It's an orange!")
